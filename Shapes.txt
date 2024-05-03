@@ -1,0 +1,9 @@
+Default - ⬜ 
+
+X Square - ⊠
+
+Flag - ⚑
+
+Bomb - 💣
+
+Empty - ▢
