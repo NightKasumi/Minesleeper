@@ -1,8 +1,11 @@
 import java.lang.Math.*;
 public class MinefieldGenerator extends Main{
     private int size = 0;
-    int warn = 0;
-    String[][] playerField = new String[20][20];
+    static int warn = 0;
+
+    static int boardRows = Main.getRows();
+
+    static String[][] playerField = new String[boardRows][boardRows];
     
     public MinefieldGenerator(int size) {
     this.size = size; 
@@ -41,7 +44,7 @@ public class MinefieldGenerator extends Main{
     public String returnPlace(int x, int y){
         return playerField[y][x];
     }
-    public String checkForBombs(int x, int y){
+    public static String checkForBombs(int x, int y){
         warn = 0;
         for (int i = x+2; i >= x; i--){
            for (int c = y-2; c <= y; c++){
@@ -51,7 +54,6 @@ public class MinefieldGenerator extends Main{
                if (playerField[i][c].contains("💣")){
                    warn++;
                }
-               playerField[i][c] = "t";
     
                
            }
@@ -68,7 +70,7 @@ public class MinefieldGenerator extends Main{
 
    return " " + playerField[y][x];
     }
-    public String[][] getWholeArray(){
+    public static String[][] getWholeArray(){
         return playerField;
     }
 }
