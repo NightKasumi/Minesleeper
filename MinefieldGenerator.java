@@ -1,4 +1,4 @@
-import java.lang.Math. *;
+import java.lang.Math.*;
 public class MinefieldGenerator extends Main{
     private int size = 0;
     int warn = 0;
@@ -42,52 +42,32 @@ public class MinefieldGenerator extends Main{
         return playerField[y][x];
     }
     public String checkForBombs(int x, int y){
-/*
         warn = 0;
         for (int i = x+2; i >= x; i--){
            for (int c = y-2; c <= y; c++){
+               if (playerField[y][x].contains("💣")){
+                   return "💣";
+               }
                if (playerField[i][c].contains("💣")){
                    warn++;
                }
+               playerField[i][c] = "t";
     
                
            }
-    
-        playerField[y][x] = String.valueOf(warn);
-        warn = 0;
-        for (int i = x; i >= x+2; i--){
-            for (int c = y; c <= y-2; c++){
-        if((i!=x) && (c!=y) && (x <= 19) && (x >= 1) && (y >= 1) && (y <= 19)){
-        checkForBombs(i,c);
-        }
+    }
+    playerField[y][x] = String.valueOf(warn);
+    warn = 0;
+     for (int i = x; i >= x+2; i--){
+           for (int c = y; c <= y-2; c++){
+      if((i!=x) && (c!=y) && (x <= 19) && (x >= 1) && (y >= 1) && (y <= 19)){
+      checkForBombs(i,c);
       }
-    }
-
-   return playerField[y][x];
-    */
-    for (int i = 0; i < 20; i++){
-            for (int c = 0; c < 20; c++){
-                    if(playerField[i][c].equals("💣"))
-                                for (int b = i-1; b >= i+1; b--){
-                                    for (int n = c+1; n <= c-1; n++){
-    try {
- if(playerField[n][b].equals("⬜")){
-     playerField[n][b] = ".";
-     }else{
-         playerfield[n][b] += ".";
      }
-}catch(Exception ArrayIndexOutOfBounds) {
-continue;
-
-                                        
-                                        
-                                    }
-                                }
-            
-        
-    return "!!!";    
     }
-    
+
+   return " " + playerField[y][x];
+    }
     public String[][] getWholeArray(){
         return playerField;
     }
