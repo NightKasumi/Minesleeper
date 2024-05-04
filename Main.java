@@ -1,36 +1,47 @@
 import java.util.Scanner;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
+
+
 public class Main
 {
+
+    static int boardRows = 0;
 
     
     public static void main(String[] args)
     {
+
+        
+
         Scanner input = new Scanner(System.in);
         int blownUp = 0;
 
+        System.out.print("Please enter the amount of rows on the board: ");
+        boardRows = input.nextInt();
+
         System.out.println("Welcome to Minesweeper!");
         System.out.println("Your goal is to mark the spots that conatin a bomb with a flag, which can be found by numbers letting you know how close you are to them. If you select a bomb spot without a flag, you're out!");
-        MinefieldGenerator yes = new MinefieldGenerator(20);
-        yes.genMinefield(20);
-        String[][] playerside = new String[20][20];
+        MinefieldGenerator yes = new MinefieldGenerator(boardRows);
+        yes.genMinefield(boardRows);
+        String[][] playerside = new String[boardRows][boardRows];
         
-;
+        SleeperWindow gui = new SleeperWindow();
 
-        for(int c = 0; c < 20; c++){
-            for(int v = 0; v<20;v++){
+        for(int c = 0; c < boardRows; c++){
+            for(int v = 0; v<boardRows;v++){
                             playerside[v][c] = "⬜";
                             
                         }
                     }
         //playerside = yes.getWholeArray();
         System.out.println("what player sees this turn");
-        for(int v = 0; v<20; v++){
-             for (int b = 0; b<20; b++){
+        for(int v = 0; v<boardRows; v++){
+             for (int b = 0; b<boardRows; b++){
                  System.out.print(playerside[v][b] + " ");
              }
             System.out.println();
@@ -41,14 +52,14 @@ public class Main
         while(blownUp == 0){
         System.out.println("Pick a X coordinate to select.");
         int sel2 = input.nextInt();
-        while (sel2 > 20 || sel2 < 0) {
+        while (sel2 > boardRows || sel2 < 0) {
             System.out.println("You're an idiot.");
             System.out.println("Pick a better X coordinate to select.");
             sel2 = input.nextInt();
         }
         System.out.println("Pick a Y coordinate to select.");
         int sel1 = input.nextInt();
-        while (sel1 > 20 || sel1 < 0) {
+        while (sel1 > boardRows || sel1 < 0) {
             System.out.println("You're an idiot.");
             System.out.println("Pick a better Y coordinate to select.");
             sel1 = input.nextInt();
@@ -56,8 +67,8 @@ public class Main
         playerside[sel1][sel2] = yes.checkForBombs(sel1,sel2);
         
        System.out.println("what player sees this turn");
-        for(int v = 0; v<20; v++){
-             for (int b = 0; b<20; b++){
+        for(int v = 0; v<boardRows; v++){
+             for (int b = 0; b<boardRows; b++){
                  System.out.print(playerside[v][b] + " ");
              }
             System.out.println();
@@ -68,7 +79,17 @@ public class Main
         }
             
         }
+
+        
+        
+
     }
+
+    public static int getRows() {
+        return boardRows;
+    }
+
+    
     
     //public void 
 
