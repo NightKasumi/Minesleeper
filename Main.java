@@ -21,8 +21,7 @@ public class Main
         Scanner input = new Scanner(System.in);
         int blownUp = 0;
 
-        System.out.print("Please enter the amount of rows on the board: ");
-        boardRows = input.nextInt();
+        boardRows = Integer.parseInt(JOptionPane.showInputDialog("Please enter the amount of rows on the board"));
 
         System.out.println("Welcome to Minesweeper!");
         System.out.println("Your goal is to mark the spots that conatin a bomb with a flag, which can be found by numbers letting you know how close you are to them. If you select a bomb spot without a flag, you're out!");
