@@ -24,6 +24,7 @@ public class SleeperWindow extends Main {
     int numCols = numRows;
     int boardWidth = numCols * tileSize;
     int boardHeight = numRows * tileSize;
+    boolean gameOver = false;
 
     JFrame frame = new JFrame("Minesleeper");
     JLabel textLabel = new JLabel();
@@ -80,13 +81,16 @@ public class SleeperWindow extends Main {
                         Tiles tile = (Tiles) e.getSource();
 
                         // Left Click
-                        if (e.getButton() == MouseEvent.BUTTON1) {
-                            if (tile.getText() == "") {
-                                if (MinefieldGenerator.checkForBombs(tile.c, tile.r).equals("💣")) {
-                                    tile.setText("💣");
-                                    textLabel.setText("Game Over!");
-                                } else {
-                                    MinefieldGenerator.checkForBombs(tile.r, tile.c);
+                        if (gameOver == false) {
+                            if (e.getButton() == MouseEvent.BUTTON1) {
+                                if (tile.getText() == "") {
+                                    if (MinefieldGenerator.checkForBombs(tile.c, tile.r).equals("💣")) {
+                                        tile.setText("💣");
+                                        textLabel.setText("Game Over!");
+                                        gameOver = true;
+                                    } else {
+                                        MinefieldGenerator.checkForBombs(tile.r, tile.c);
+                                    }
                                 }
                             }
                         }
@@ -98,5 +102,7 @@ public class SleeperWindow extends Main {
             }
         }
         frame.setVisible(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setUndecorated(true);
     }
 }
