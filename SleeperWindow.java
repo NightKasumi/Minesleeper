@@ -87,11 +87,19 @@ public class SleeperWindow extends Main {
                                 if (tile.getText() == "") {
                                     if (MinefieldGenerator.checkForBombs(tile.c, tile.r).equals("💣")) {
                                         tile.setText("💣");
-                                        textLabel.setText("Game Over!");
                                         gameOver = true;
+                                        textLabel.setText("Game Over!");
                                     } else {
                                         tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
                                     }
+                                }
+                            }
+
+                            if (e.getButton() == MouseEvent.BUTTON3) {
+                                if (tile.getText() == "") {
+                                    tile.setText("⚑");
+                                } else {
+                                    tile.setText("");
                                 }
                             }
                         }

@@ -35,7 +35,7 @@ public class MinefieldGenerator extends Main{
                  if(mine[v][b].equals("💣")){
                      mines++;
                  }
-                 System.out.print(mine[v][b] + " ");
+                 System.out.print(mine[v][b]);
              }
             System.out.println();
          }   
