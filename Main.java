@@ -1,9 +1,5 @@
 import java.util.Scanner;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.*;
 
 
@@ -41,7 +37,7 @@ public class Main
         System.out.println("what player sees this turn");
         for(int v = 0; v<boardRows; v++){
              for (int b = 0; b<boardRows; b++){
-                 System.out.print(playerside[v][b] + " ");
+                 System.out.print(playerside[v][b]);
              }
             System.out.println();
          }
@@ -63,7 +59,7 @@ public class Main
             System.out.println("Pick a better Y coordinate to select.");
             sel1 = input.nextInt();
         }
-        playerside[sel1][sel2] = yes.checkForBombs(sel1,sel2);
+        playerside[sel1][sel2] = MinefieldGenerator.checkForBombs(sel1,sel2);
         
        System.out.println("what player sees this turn");
         for(int v = 0; v<boardRows; v++){
@@ -72,7 +68,7 @@ public class Main
              }
             System.out.println();
          } 
-    if(yes.checkForBombs(sel1,sel2).equals("💣")){
+    if(MinefieldGenerator.checkForBombs(sel1,sel2).equals("💣")){
             System.out.println("You found a Mine! You lose!!! get better tbh");
             break;
         }

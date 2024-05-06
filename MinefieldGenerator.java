@@ -1,4 +1,4 @@
-import java.lang.Math.*;
+
 public class MinefieldGenerator extends Main{
     private int size = 0;
     static int warn = 0;
