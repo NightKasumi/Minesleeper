@@ -49,7 +49,8 @@ public class MinefieldGenerator extends Main{
         for (int i = x+2; i >= x; i--){
            for (int c = y-2; c <= y; c++){
                if (playerField[y][x].contains("💣")){
-                   return "💣";
+                    SleeperWindow.revealMines(playerField);
+                    return "💣";
                }
                if (playerField[i][c].contains("💣")){
                    warn++;

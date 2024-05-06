@@ -99,4 +99,13 @@ public class SleeperWindow extends Main {
         }
         frame.setVisible(true);
     }
+
+    public static void revealMines(String[][] arrList) {
+        for (int i=0;i<arrList.length;i++) {
+            for (int c=0;c<arrList[i].length;c++) {
+                Tiles tile = arrList[i][c];
+                tile.setText("💣");
+            }
+        }
+    }
 }
