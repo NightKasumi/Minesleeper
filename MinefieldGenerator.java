@@ -2,6 +2,7 @@ import java.lang.Math.*;
 public class MinefieldGenerator extends Main{
     private int size = 0;
     static int warn = 0;
+    static int mines;
 
     static int boardRows = Main.getRows();
 
@@ -15,12 +16,12 @@ public class MinefieldGenerator extends Main{
 
         public void genMinefield(int leng){
 
-         int mines = 0;
+        mines = 0;
             MinefieldGenerator minefield = new MinefieldGenerator(leng);
             String[][] mine = new String[leng][leng];
             for(int i = 0; i < leng; i++){
                 for(int c = 0; c < leng; c++){
-                    if (((double)Math.random()*8 + 1/2) > 7){
+                    if (((double)Math.random()*8 + 1/2) > 7.5){
                         mine[i][c] = "💣";
                         }else{
                             mine[i][c] = "⬜";
@@ -41,6 +42,11 @@ public class MinefieldGenerator extends Main{
         System.out.println("number of mines: " + mines);
             
         }
+
+        public static int getMines() {
+            return mines;
+        }
+
     public String returnPlace(int x, int y){
         return playerField[y][x];
     }
@@ -68,7 +74,7 @@ public class MinefieldGenerator extends Main{
      }
     }
 
-   return " " + playerField[y][x];
+   return playerField[y][x];
     }
     public static String[][] getWholeArray(){
         return playerField;
