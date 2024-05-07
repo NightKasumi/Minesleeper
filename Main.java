@@ -21,18 +21,18 @@ public class Main
         System.out.println("Your goal is to mark the spots that conatin a bomb with a flag, which can be found by numbers letting you know how close you are to them. If you select a bomb spot without a flag, you're out!");
 
         // GUI Input
-        boardRows = Integer.parseInt(JOptionPane.showInputDialog("Please enter the amount of rows on the board"));
+        //boardRows = Integer.parseInt(JOptionPane.showInputDialog("Please enter the amount of rows on the board"));
 
         // Text Input
-        //System.out.print("Please enter the amount of rows on the board: ");
-        //boardRows = input.nextInt();
+        System.out.print("Please enter the amount of rows on the board: ");
+        boardRows = input.nextInt();
 
         MinefieldGenerator yes = new MinefieldGenerator(boardRows);
         yes.genMinefield(boardRows);
         String[][] playerside = new String[boardRows][boardRows];
         
         // Runs GUI
-        SleeperWindow gui = new SleeperWindow();
+        //SleeperWindow gui = new SleeperWindow();
 
         for(int c = 0; c < boardRows; c++){
             for(int v = 0; v<boardRows;v++){

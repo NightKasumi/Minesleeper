@@ -52,15 +52,14 @@ public class MinefieldGenerator extends Main{
     }
     public static String checkForBombs(int x, int y){
         warn = 0;
-        for (int i = x+2; i >= x; i--){
-           for (int c = y-2; c <= y; c++){
+        for (int i = x-1; i >= x+1; i--){
+           for (int c = y-1; c <= y+1; c++){
                if (playerField[y][x].contains("💣")){
                    return "💣";
                }
                if (playerField[i][c].contains("💣")){
                    warn++;
                }
-               playerField[i][c] = "t ";
                
            }
     }
