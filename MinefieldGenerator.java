@@ -38,7 +38,7 @@ public class MinefieldGenerator extends Main{
                  System.out.print(mine[v][b]);
              }
             System.out.println();
-         }   
+        }
         System.out.println("number of mines: " + mines);
             
         }
@@ -60,7 +60,7 @@ public class MinefieldGenerator extends Main{
                if (playerField[i][c].contains("💣")){
                    warn++;
                }
-    
+               playerField[i][c] = "t ";
                
            }
     }
@@ -74,7 +74,7 @@ public class MinefieldGenerator extends Main{
      }
     }
 
-   return playerField[y][x];
+   return (String) playerField[y][x];
     }
     public static String[][] getWholeArray(){
         return playerField;
