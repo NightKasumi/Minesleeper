@@ -3,10 +3,13 @@ public class MinefieldGenerator extends Main{
     private int size = 0;
     static int warn = 0;
     static int mines;
+    static int danger;
 
     static int boardRows = Main.getRows();
 
     static String[][] playerField = new String[boardRows][boardRows];
+
+    static int[][] numField = new int[boardRows][boardRows];
     
     public MinefieldGenerator(int size) {
     this.size = size; 
@@ -40,8 +43,8 @@ public class MinefieldGenerator extends Main{
             System.out.println();
         }
         System.out.println("number of mines: " + mines);
-            
-        }
+        
+    }
 
         public static int getMines() {
             return mines;
