@@ -48,21 +48,25 @@ public class MinefieldGenerator extends Main{
         }
 
     public String returnPlace(int x, int y){
-        return playerField[y][x];
+        return playerField[x][y];
     }
     public static String checkForBombs(int x, int y){
         warn = 0;
-        for (int i = x-1; i >= x+1; i--){
-           for (int c = y-1; c <= y+1; c++){
-               if (playerField[y][x].contains("💣")){
-                   return "💣";
-               }
-               if (playerField[i][c].contains("💣")){
-                   warn++;
-               }
-               
-           }
-    }
+
+        for (int i = x+1; i >= x-1; i--){
+            for (int c = y-1; c <= y-1; c++){
+                if ((c<0 || c>playerField.length) || (i<0 || i>playerField.length)) {
+                continue;
+                } else {
+                    if (playerField[x][y].contains("💣")){
+                        return "💣";
+                    }
+                    if (playerField[i][c].contains("💣")){
+                        warn++;
+                    }
+                }
+            }
+        }
     playerField[y][x] = String.valueOf(warn);
     warn = 0;
      for (int i = x; i >= x+2; i--){
