@@ -96,8 +96,10 @@ public class SleeperWindow extends Main {
                             if (e.getButton() == MouseEvent.BUTTON3) {
                                 if (tile.getText() == "") {
                                     tile.setText("⚑");
-                                } else {
+                                } else if (tile.getText() == "⚑") {
                                     tile.setText("");
+                                } else {
+                                    continue;
                                 }
                             }
                         }
