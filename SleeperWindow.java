@@ -33,15 +33,7 @@ public class SleeperWindow extends Main {
     ArrayList<Tiles> mineList = new ArrayList<Tiles>();
 
     String[][] playerList = MinefieldGenerator.getWholeArray();
-/*
-    for (int i=0;i<playerList.length;i++) {
-        for (int c=0;c<playerList[i].length;c++) {
-            if (playerList[i][c].contains("💣")) {
-                mineList.add(playerList[i][c]);
-            }
-        }
-    }
-*/
+
     Tiles[][] board = new Tiles[numRows][numCols];
 
     SleeperWindow() {
@@ -98,8 +90,6 @@ public class SleeperWindow extends Main {
                                     tile.setText("⚑");
                                 } else if (tile.getText() == "⚑") {
                                     tile.setText("");
-                                } else {
-                                    continue;
                                 }
                             }
                         }
