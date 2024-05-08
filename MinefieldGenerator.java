@@ -128,6 +128,7 @@ public class MinefieldGenerator extends Main{
         return (String) playerField[x][y];
     }
 
+/*
     public static String checkForBombsTemp(int x, int y){
         warn = 0;
 
@@ -158,6 +159,8 @@ public class MinefieldGenerator extends Main{
 
    return (String) playerField[y][x];
     }
+*/
+
     public static String[][] getWholeArray(){
         return playerField;
     }
