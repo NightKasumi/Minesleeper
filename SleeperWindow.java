@@ -76,9 +76,9 @@ public class SleeperWindow extends Main {
                             if (e.getButton() == MouseEvent.BUTTON1) {
                                 if (tile.getText() == "") {
                                     if (MinefieldGenerator.checkForBombs(tile.c, tile.r).contains("💣")) {
-                                        tile.setText("💣");
                                         gameOver = true;
                                         textLabel.setText("Game Over!");
+                                        tile.setText("💣");
                                     } else {
                                         tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
                                     }
