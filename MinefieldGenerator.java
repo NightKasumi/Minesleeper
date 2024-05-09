@@ -41,7 +41,7 @@ public class MinefieldGenerator extends Main{
                  }
                  System.out.print(mine[v][b]);
              }
-            System.out.println();
+            System.out.println("");
         }
         System.out.println("number of mines: " + mines);
         
@@ -61,7 +61,7 @@ public class MinefieldGenerator extends Main{
         for (int i=0;i<playerField.length;i++) {
             for (int c=0;c<playerField[i].length;c++) {
                 if (playerField[i][c].contains("💣")) {
-                    mineList.add(i + "," + c);
+                    mineList.add(i + ", " + c);
                 }
             }
         }
@@ -71,56 +71,19 @@ public class MinefieldGenerator extends Main{
 
     public static String checkForBombs(int x, int y) {
         int warn = 0;
+        ArrayList<String> arr = getMineList();
 
         if (playerField[x][y].contains("💣")) {
             return "💣";
         } else {
-            
-                if (x<playerField.length) {
-                    if (playerField[x+1][y].contains("💣")) {
+            for(int i = x-1; i <= x+1; i++) {
+                for(int j = y-1; j <= y+1; j++) {
+                        //process tile (i,j)
+                    if (arr.contains(i + ", " + j)) {
                         warn++;
                     }
                 }
-                if (x>0) {
-                    if (playerField[x-1][y].contains("💣")) {
-                        warn++;
-                    } 
-                }
-                if (y<playerField.length) {
-                    if (playerField[x][y+1].contains("💣")) {
-                        warn++;
-                    }
-                }
-                if (y>0) {
-                    if (playerField[x][y-1].contains("💣")) {
-                        warn++;
-
-                        playerField[x][y-1] = "t ";
-                    }
-                }
-                if (x<playerField.length && y<playerField.length) {
-                    if (playerField[x+1][y+1].contains("💣")) {
-                        warn++;
-
-                        playerField[x+1][y+1] = "t ";
-                    }
-                }
-                if (x<playerField.length && y>0) {
-                    if (playerField[x+1][y-1].contains("💣")) {
-                        warn++;
-                    }
-                }
-                if (x>0 && y<playerField.length) {
-                    if (playerField[x-1][y+1].contains("💣")) {
-                        warn++;
-                    }
-                }
-                if (x>0 && y>0) {
-                    if (playerField[x-1][y-1].contains("💣")) {
-                        warn++;
-                    }
-                }
-            
+            }
         }
         playerField[x][y] = String.valueOf(warn);
         warn = 0;
@@ -160,6 +123,8 @@ public class MinefieldGenerator extends Main{
    return (String) playerField[y][x];
     }
 */
+
+    
 
     public static String[][] getWholeArray(){
         return playerField;
