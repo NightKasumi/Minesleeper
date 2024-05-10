@@ -61,7 +61,7 @@ public class MinefieldGenerator extends Main{
         for (int i=0;i<playerField.length;i++) {
             for (int c=0;c<playerField[i].length;c++) {
                 if (playerField[i][c].contains("💣")) {
-                    mineList.add(i + ", " + c);
+                    mineList.add(i + "," + c);
                 }
             }
         }
@@ -78,8 +78,7 @@ public class MinefieldGenerator extends Main{
         } else {
             for(int i = x-1; i <= x+1; i++) {
                 for(int j = y-1; j <= y+1; j++) {
-                        //process tile (i,j)
-                    if (arr.contains(i + ", " + j)) {
+                    if (arr.contains(i + "," + j)) {
                         warn++;
                     }
                 }

@@ -75,12 +75,15 @@ public class SleeperWindow extends Main {
                         if (gameOver == false) {
                             if (e.getButton() == MouseEvent.BUTTON1) {
                                 if (tile.getText() == "") {
-                                    if (MinefieldGenerator.checkForBombs(tile.c, tile.r).contains("💣")) {
+                                    if (MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("💣")) {
                                         gameOver = true;
                                         textLabel.setText("Game Over!");
                                         tile.setText("💣");
                                     } else {
-                                        tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
+                                        tile.setEnabled(false);
+                                        if (MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("0")) {
+                                            tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
+                                        }
                                     }
                                 }
                             }
@@ -104,4 +107,6 @@ public class SleeperWindow extends Main {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
     }
+
+    
 }
