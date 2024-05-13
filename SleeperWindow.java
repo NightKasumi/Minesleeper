@@ -81,7 +81,7 @@ public class SleeperWindow extends Main {
                                         tile.setText("💣");
                                     } else {
                                         tile.setEnabled(false);
-                                        if (MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("0")) {
+                                        if (!MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("0")) {
                                             tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
                                         }
                                     }
