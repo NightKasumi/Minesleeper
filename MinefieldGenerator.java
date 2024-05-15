@@ -25,7 +25,7 @@ public class MinefieldGenerator extends Main{
             String[][] mine = new String[leng][leng];
             for(int i = 0; i < leng; i++){
                 for(int c = 0; c < leng; c++){
-                    if (((double)Math.random()*8 + 1/2) > 6){
+                    if (((double)Math.random()*8 + 1/2) > 6.5){
                         mine[i][c] = "💣";
                         }else{
                             mine[i][c] = "⬜";
