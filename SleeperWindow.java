@@ -125,6 +125,19 @@ public class SleeperWindow extends Main {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
     }
-
     
+    /*
+    Tiles floodFill( int x, int y ) {
+        Tiles tile = new Tiles(x, y);
+        if (MinefieldGenerator.checkForBombs(x, y).contains("0")) {
+            tile.setText("");
+            floodFill( x+1, y );
+            floodFill( x-1, y );
+            floodFill( x, y-1 );
+            floodFill( x, y+1 );
+        } else {
+            return tile;
+        }
+     }
+     */
 }
