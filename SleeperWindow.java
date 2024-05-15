@@ -24,13 +24,15 @@ public class SleeperWindow extends Main {
     int boardHeight = numRows * tileSize;
     boolean gameOver = false;
     int mines = MinefieldGenerator.getMines();
+    int flagCount = mines;
+    int correctFlags = 0;
 
     JFrame frame = new JFrame("Minesleeper");
     JLabel textLabel = new JLabel();
     JPanel textPanel = new JPanel();
     JPanel boardPanel = new JPanel();
 
-    ArrayList<Tiles> mineList = new ArrayList<Tiles>();
+    ArrayList<String> mineList = MinefieldGenerator.getMineList();
 
     String[][] playerList = MinefieldGenerator.getWholeArray();
 
@@ -46,7 +48,7 @@ public class SleeperWindow extends Main {
 
         textLabel.setFont(new Font("Arial", Font.BOLD, 24));
         textLabel.setHorizontalAlignment(JLabel.CENTER);
-        textLabel.setText("Minesleeper " + mines);
+        textLabel.setText("Minesleeper | Flags: " + flagCount);
         textLabel.setOpaque(true);
 
         textPanel.setLayout(new BorderLayout());
@@ -89,10 +91,26 @@ public class SleeperWindow extends Main {
                             }
 
                             if (e.getButton() == MouseEvent.BUTTON3) {
-                                if (tile.getText() == "") {
+                                if (tile.getText() == "" && flagCount > 0) {
                                     tile.setText("⚑");
+                                    flagCount--;
+                                    textLabel.setText("Minesleeper | Flags: " + flagCount);
+                                    if (mineList.contains(tile.r + "," + tile.c)) {
+                                        correctFlags++;
+                                    }
+                                    System.out.println("correctFlags = " + correctFlags);
+                                    System.out.println("mines = " + mines);
+                                    if (correctFlags == mines) {
+                                        textLabel.setText("You win, but you get nothing!!!");
+                                        gameOver = true;
+                                    }
                                 } else if (tile.getText() == "⚑") {
                                     tile.setText("");
+                                    flagCount++;
+                                    textLabel.setText("Minesleeper | Flags: " + flagCount);
+                                    if (mineList.contains(tile.r + "," + tile.c)) {
+                                        correctFlags--;
+                                    }
                                 }
                             }
                         }

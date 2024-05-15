@@ -72,7 +72,7 @@ public class Main
             playerside[sel1][sel2] = MinefieldGenerator.checkForBombs(sel1, sel2) + " ";
         }
         
-       System.out.println("what player sees this turn");
+       System.out.println("what player sees this turn:");
         for(int v = 0; v<boardRows; v++){
              for (int b = 0; b<boardRows; b++){
                  System.out.print(playerside[v][b]);
