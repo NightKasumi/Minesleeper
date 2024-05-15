@@ -98,8 +98,6 @@ public class SleeperWindow extends Main {
                                     if (mineList.contains(tile.r + "," + tile.c)) {
                                         correctFlags++;
                                     }
-                                    System.out.println("correctFlags = " + correctFlags);
-                                    System.out.println("mines = " + mines);
                                     if (correctFlags == mines) {
                                         textLabel.setText("You win, but you get nothing!!!");
                                         gameOver = true;
@@ -112,6 +110,8 @@ public class SleeperWindow extends Main {
                                         correctFlags--;
                                     }
                                 }
+                                System.out.println("correctFlags = " + correctFlags);
+                                System.out.println("mines = " + mines);
                             }
                         }
                     }
