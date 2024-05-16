@@ -129,8 +129,8 @@ public class SleeperWindow extends Main {
     public void floodFill (int x, int y) {
         if (x<board.length && x>0 && y<board[x].length && y>0) {
             Tiles tile = board[x][y];
+            tile.setEnabled(false);
             if (MinefieldGenerator.checkForBombs(x, y).contains("0")) {
-                tile.setEnabled(false);
                 floodFill(x+1, y);
                 floodFill(x, y+1);
                 floodFill(x, y-1);
