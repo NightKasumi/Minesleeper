@@ -72,7 +72,6 @@ public class SleeperWindow extends Main {
                     @Override
                     public void mousePressed(MouseEvent e) {
                         Tiles tile = (Tiles) e.getSource();
-
                         // Left Click
                         if (gameOver == false) {
                             if (e.getButton() == MouseEvent.BUTTON1) {
@@ -83,6 +82,7 @@ public class SleeperWindow extends Main {
                                         tile.setText("💣");
                                     } else {
                                         tile.setEnabled(false);
+                                        floodFill(tile.r, tile.c);
                                         if (!MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("0")) {
                                             tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
                                         }
@@ -125,19 +125,17 @@ public class SleeperWindow extends Main {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
     }
-    
-    /*
-    Tiles floodFill( int x, int y ) {
-        Tiles tile = new Tiles(x, y);
-        if (MinefieldGenerator.checkForBombs(x, y).contains("0")) {
-            tile.setText("");
-            floodFill( x+1, y );
-            floodFill( x-1, y );
-            floodFill( x, y-1 );
-            floodFill( x, y+1 );
-        } else {
-            return tile;
+
+    public void floodFill (int x, int y) {
+        if (x<board.length && x>0 && y<board[x].length && y>0) {
+            Tiles tile = board[x][y];
+            if (MinefieldGenerator.checkForBombs(x, y).contains("0")) {
+                tile.setEnabled(false);
+                floodFill(x+1, y);
+                floodFill(x, y+1);
+                floodFill(x, y-1);
+                floodFill(x-1, y);
+            }
         }
-     }
-     */
+    } 
 }
