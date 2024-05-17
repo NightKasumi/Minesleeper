@@ -34,6 +34,8 @@ public class SleeperWindow extends Main {
 
     ArrayList<String> mineList = MinefieldGenerator.getMineList();
 
+    ArrayList<String> tested = new ArrayList<>();
+
     String[][] playerList = MinefieldGenerator.getWholeArray();
 
     Tiles[][] board = new Tiles[numRows][numCols];
@@ -127,14 +129,22 @@ public class SleeperWindow extends Main {
     }
 
     public void floodFill (int x, int y) {
-        if (x<board.length && x>0 && y<board[x].length && y>0) {
+        if (x<board.length && x>=0 && y<board[x].length && y>=0 && !tested.contains(x + "," + y)) {
             Tiles tile = board[x][y];
+            tested.add(x + "," + y);
+            if (!MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("0")) {
+                tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
+            }
             tile.setEnabled(false);
             if (MinefieldGenerator.checkForBombs(x, y).contains("0")) {
                 floodFill(x+1, y);
                 floodFill(x, y+1);
                 floodFill(x, y-1);
                 floodFill(x-1, y);
+                floodFill(x+1, y+1);
+                floodFill(x-1, y+1);
+                floodFill(x+1, y-1);
+                floodFill(x-1, y-1);
             }
         }
     } 
