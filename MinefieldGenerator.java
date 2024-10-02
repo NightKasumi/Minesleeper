@@ -1,11 +1,16 @@
-import java.lang.Math.*;
+import java.util.ArrayList;
+
 public class MinefieldGenerator extends Main{
     private int size = 0;
     static int warn = 0;
+    static int mines;
+    static int danger;
 
     static int boardRows = Main.getRows();
 
     static String[][] playerField = new String[boardRows][boardRows];
+
+    static int[][] numField = new int[boardRows][boardRows];
     
     public MinefieldGenerator(int size) {
     this.size = size; 
@@ -15,7 +20,7 @@ public class MinefieldGenerator extends Main{
 
         public void genMinefield(int leng){
 
-         int mines = 0;
+        mines = 0;
             MinefieldGenerator minefield = new MinefieldGenerator(leng);
             String[][] mine = new String[leng][leng];
             for(int i = 0; i < leng; i++){
@@ -34,18 +39,54 @@ public class MinefieldGenerator extends Main{
                  if(mine[v][b].equals("💣")){
                      mines++;
                  }
-                 System.out.print(mine[v][b] + " ");
+                 System.out.print(mine[v][b]);
              }
-            System.out.println();
-         }   
-        System.out.println("number of mines: " + mines);
-            
+            System.out.println("");
         }
-    public String returnPlace(int x, int y){
-        return playerField[y][x];
+        System.out.println("number of mines: " + mines);
+        
     }
-    public static String checkForBombs(int x, int y){
+
+        public static int getMines() {
+            return mines;
+        }
+
+    public String returnPlace(int x, int y){
+        return playerField[x][y];
+    }
+
+    public static ArrayList<String> getMineList() {
+        ArrayList<String> mineList = new ArrayList<String>();
+
+        for (int i=0;i<playerField.length;i++) {
+            for (int c=0;c<playerField[i].length;c++) {
+                if (playerField[i][c].contains("💣")) {
+                    mineList.add(i + "," + c);
+                }
+            }
+        }
+
+        return mineList;
+    }
+
+    public static String checkForBombs(int x, int y) {
+        int warn = 0;
+        ArrayList<String> arr = getMineList();
+
+        if (playerField[x][y].contains("💣")) {
+            return "💣";
+        } else {
+            for(int i = x-1; i <= x+1; i++) {
+                for(int j = y-1; j <= y+1; j++) {
+                    if (arr.contains(i + "," + j)) {
+                        warn++;
+                    }
+                }
+            }
+        }
+        playerField[x][y] = String.valueOf(warn);
         warn = 0;
+<<<<<<< HEAD
         for (int i = x+2; i >= x; i--){
            for (int c = y-2; c <= y; c++){
                if (playerField[y][x].contains("💣")){
@@ -58,7 +99,31 @@ public class MinefieldGenerator extends Main{
     
                
            }
+=======
+
+        return (String) playerField[x][y];
+>>>>>>> 1f8394fe494d55b117cb170bbb876cea04b85969
     }
+
+/*
+    public static String checkForBombsTemp(int x, int y){
+        warn = 0;
+
+        for (int i = x+1; i >= x-1; i--){
+            for (int c = y-1; c <= y-1; c++){
+                if ((c<0 || c>playerField.length) || (i<0 || i>playerField.length)) {
+                continue;
+                } else {
+                    if (playerField[x][y].contains("💣")){
+                        return "💣";
+                    }
+                    if (playerField[i][c].contains("💣")){
+                        warn++;
+                    }
+                }
+            }
+        }
+        
     playerField[y][x] = String.valueOf(warn);
     warn = 0;
      for (int i = x; i >= x+2; i--){
@@ -69,9 +134,18 @@ public class MinefieldGenerator extends Main{
      }
     }
 
-   return " " + playerField[y][x];
+   return (String) playerField[y][x];
     }
+*/
+
+    
+
     public static String[][] getWholeArray(){
         return playerField;
     }
+
+
+
+
+
 }

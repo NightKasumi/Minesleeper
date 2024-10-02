@@ -1,8 +1,6 @@
-import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.*;
 
 public class SleeperWindow extends Main {
@@ -24,24 +22,22 @@ public class SleeperWindow extends Main {
     int numCols = numRows;
     int boardWidth = numCols * tileSize;
     int boardHeight = numRows * tileSize;
+    boolean gameOver = false;
+    int mines = MinefieldGenerator.getMines();
+    int flagCount = mines;
+    int correctFlags = 0;
 
     JFrame frame = new JFrame("Minesleeper");
     JLabel textLabel = new JLabel();
     JPanel textPanel = new JPanel();
     JPanel boardPanel = new JPanel();
 
-    ArrayList<Tiles> mineList = new ArrayList<Tiles>();
+    ArrayList<String> mineList = MinefieldGenerator.getMineList();
+
+    ArrayList<String> tested = new ArrayList<>();
 
     String[][] playerList = MinefieldGenerator.getWholeArray();
-/*
-    for (int i=0;i<playerList.length;i++) {
-        for (int c=0;c<playerList[i].length;c++) {
-            if (playerList[i][c].contains("💣")) {
-                mineList.add(playerList[i][c]);
-            }
-        }
-    }
-*/
+
     Tiles[][] board = new Tiles[numRows][numCols];
 
     SleeperWindow() {
@@ -54,7 +50,7 @@ public class SleeperWindow extends Main {
 
         textLabel.setFont(new Font("Arial", Font.BOLD, 24));
         textLabel.setHorizontalAlignment(JLabel.CENTER);
-        textLabel.setText("Minesleeper");
+        textLabel.setText("Minesleeper | Flags: " + flagCount);
         textLabel.setOpaque(true);
 
         textPanel.setLayout(new BorderLayout());
@@ -78,16 +74,46 @@ public class SleeperWindow extends Main {
                     @Override
                     public void mousePressed(MouseEvent e) {
                         Tiles tile = (Tiles) e.getSource();
-
                         // Left Click
-                        if (e.getButton() == MouseEvent.BUTTON1) {
-                            if (tile.getText() == "") {
-                                if (MinefieldGenerator.checkForBombs(tile.c, tile.r).equals("💣")) {
-                                    tile.setText("💣");
-                                    textLabel.setText("Game Over!");
-                                } else {
-                                    MinefieldGenerator.checkForBombs(tile.r, tile.c);
+                        if (gameOver == false) {
+                            if (e.getButton() == MouseEvent.BUTTON1) {
+                                if (tile.getText() == "") {
+                                    if (MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("💣")) {
+                                        gameOver = true;
+                                        textLabel.setText("Game Over!");
+                                        tile.setText("💣");
+                                    } else {
+                                        tile.setEnabled(false);
+                                        floodFill(tile.r, tile.c);
+                                        if (!MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("0")) {
+                                            tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
+                                        }
+                                    }
                                 }
+                            }
+
+                            if (e.getButton() == MouseEvent.BUTTON3) {
+                                if (tile.getText() == "" && flagCount > 0) {
+                                    tile.setText("⚑");
+                                    flagCount--;
+                                    textLabel.setText("Minesleeper | Flags: " + flagCount);
+                                    if (mineList.contains(tile.r + "," + tile.c)) {
+                                        correctFlags++;
+                                    }
+                                    if (correctFlags == mines) {
+                                        textLabel.setText("You win, but you get nothing!!!");
+                                        gameOver = true;
+                                    }
+                                } else if (tile.getText() == "⚑") {
+                                    tile.setText("");
+                                    flagCount++;
+                                    textLabel.setText("Minesleeper | Flags: " + flagCount);
+                                    if (mineList.contains(tile.r + "," + tile.c)) {
+                                        correctFlags--;
+                                    }
+                                }
+                                System.out.println("correctFlags = " + correctFlags);
+                                System.out.println("mines = " + mines);
                             }
                         }
                     }
@@ -98,8 +124,11 @@ public class SleeperWindow extends Main {
             }
         }
         frame.setVisible(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setUndecorated(true);
     }
 
+<<<<<<< HEAD
     public static void revealMines(String[][] arrList) {
         for (int i=0;i<arrList.length;i++) {
             for (int c=0;c<arrList[i].length;c++) {
@@ -108,4 +137,26 @@ public class SleeperWindow extends Main {
             }
         }
     }
+=======
+    public void floodFill (int x, int y) {
+        if (x<board.length && x>=0 && y<board[x].length && y>=0 && !tested.contains(x + "," + y)) {
+            Tiles tile = board[x][y];
+            tested.add(x + "," + y);
+            if (!MinefieldGenerator.checkForBombs(tile.r, tile.c).contains("0")) {
+                tile.setText(MinefieldGenerator.checkForBombs(tile.r, tile.c));
+            }
+            tile.setEnabled(false);
+            if (MinefieldGenerator.checkForBombs(x, y).contains("0")) {
+                floodFill(x+1, y);
+                floodFill(x, y+1);
+                floodFill(x, y-1);
+                floodFill(x-1, y);
+                floodFill(x+1, y+1);
+                floodFill(x-1, y+1);
+                floodFill(x+1, y-1);
+                floodFill(x-1, y-1);
+            }
+        }
+    } 
+>>>>>>> 1f8394fe494d55b117cb170bbb876cea04b85969
 }

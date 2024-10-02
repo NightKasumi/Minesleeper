@@ -1,9 +1,5 @@
 import java.util.Scanner;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.*;
 
 
@@ -21,14 +17,21 @@ public class Main
         Scanner input = new Scanner(System.in);
         int blownUp = 0;
 
-        boardRows = Integer.parseInt(JOptionPane.showInputDialog("Please enter the amount of rows on the board"));
-
         System.out.println("Welcome to Minesweeper!");
         System.out.println("Your goal is to mark the spots that conatin a bomb with a flag, which can be found by numbers letting you know how close you are to them. If you select a bomb spot without a flag, you're out!");
+
+        // GUI Input
+        boardRows = Integer.parseInt(JOptionPane.showInputDialog("Please enter the amount of rows on the board"));
+
+        // Text Input
+        // System.out.print("Please enter the amount of rows on the board: ");
+        // boardRows = input.nextInt();
+
         MinefieldGenerator yes = new MinefieldGenerator(boardRows);
         yes.genMinefield(boardRows);
         String[][] playerside = new String[boardRows][boardRows];
         
+        // Runs GUI
         SleeperWindow gui = new SleeperWindow();
 
         for(int c = 0; c < boardRows; c++){
@@ -41,13 +44,13 @@ public class Main
         System.out.println("what player sees this turn");
         for(int v = 0; v<boardRows; v++){
              for (int b = 0; b<boardRows; b++){
-                 System.out.print(playerside[v][b] + " ");
+                 System.out.print(playerside[v][b]);
              }
             System.out.println();
          }
         
     // C - this is a tester for returning a specified place value
-        System.out.println(yes.returnPlace(3,4));   
+        // System.out.println(yes.returnPlace(3,4));   
         while(blownUp == 0){
         System.out.println("Pick a X coordinate to select.");
         int sel2 = input.nextInt();
@@ -63,16 +66,20 @@ public class Main
             System.out.println("Pick a better Y coordinate to select.");
             sel1 = input.nextInt();
         }
-        playerside[sel1][sel2] = yes.checkForBombs(sel1,sel2);
+        if (MinefieldGenerator.checkForBombs(sel1, sel2).contains("💣")) {
+            playerside[sel1][sel2] = MinefieldGenerator.checkForBombs(sel1, sel2);
+        } else {
+            playerside[sel1][sel2] = MinefieldGenerator.checkForBombs(sel1, sel2) + " ";
+        }
         
-       System.out.println("what player sees this turn");
+       System.out.println("what player sees this turn:");
         for(int v = 0; v<boardRows; v++){
              for (int b = 0; b<boardRows; b++){
-                 System.out.print(playerside[v][b] + " ");
+                 System.out.print(playerside[v][b]);
              }
             System.out.println();
          } 
-    if(yes.checkForBombs(sel1,sel2).equals("💣")){
+    if(MinefieldGenerator.checkForBombs(sel1,sel2).equals("💣")){
             System.out.println("You found a Mine! You lose!!! get better tbh");
             break;
         }
@@ -88,11 +95,6 @@ public class Main
         return boardRows;
     }
 
-    
-    
-    //public void 
 
-
-    
-    
 }
+
